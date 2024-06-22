@@ -15,6 +15,7 @@ let UglifyJS = require("uglify-js");
 let fs = require("fs");
 
 let process = fs.readFileSync("./preprocess.sh", "utf8");
+let undo = ``;
 
 for (let i = 0; i < codes.length; i++) {
     let codeInfo = codes[i];
@@ -22,13 +23,16 @@ for (let i = 0; i < codes.length; i++) {
     let code = fs.readFileSync("./replacement/"+codeInfo.name, "utf8");
     let result = UglifyJS.minify(code);
 
+    undo += `cp ${codeInfo.path}.bak ${codeInfo.path}\n`
+
     process += `
 file${i}='${codeInfo.path}'
 file${i}_add='${result.code}'
 file${i}_end='${codeInfo.endsWith}'
 process_file "$file${i}" "$file${i}_add" "$file${i}_end"
 `
-
 }
 
-console.log(process)
+fs.mkdirSync("./output", { recursive: true });
+fs.writeFileSync("./output/output_process.sh", process);
+fs.writeFileSync("./output/output_undo.sh", undo);

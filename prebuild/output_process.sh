@@ -19,7 +19,7 @@ process_file() {
 }
 
 file0='/system/dashboard-ui/modules/emby-elements/emby-itemscontainer/emby-itemscontainer.js'
-file0_add='var o_onDataFetched=onDataFetched,onDataFetched=function(a){if(a.Items&&a.Items.length&&"LyricsLine"==a.Items[0].Type){var s=[],n=a.Items;for(let t=0,e=a.Items.length;t<e-1;t++){var o=n[t];o.StartPositionTicks==n[t+1].StartPositionTicks&&(o.Text=o.Text+"<br>"+n[t+1].Text,t++),s.push(o)}a.Items=s}return o_onDataFetched.apply(this,[a])};'
+file0_add='var o_onDataFetched=onDataFetched,onDataFetched=function(o){if(o.Items&&o.Items.length&&"LyricsLine"==o.Items[0].Type){var s=[],i=o.Items;i.sort((t,e)=>t.StartPositionTicks-e.StartPositionTicks);for(let t=0,e=o.Items.length;t<e;t++){for(var a=i[t];i[t+1]&&a.StartPositionTicks==i[t+1].StartPositionTicks;)a.Text=a.Text+"<br>"+i[t+1].Text,t++;s.push(a)}o.Items=s}return o_onDataFetched.apply(this,[o])};'
 file0_end='});'
 process_file "$file0" "$file0_add" "$file0_end"
 

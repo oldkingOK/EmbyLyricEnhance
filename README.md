@@ -69,8 +69,8 @@ node main.js
 	margin: 0 0;
 	font-size: 150%;
 }
-.listItemBody{
-	text-align: center
+.listItemBody.itemAction.listItemBody-noleftpadding.listItemBody-noverticalpadding.listItemBody-reduceypadding.listItemBody-1-lines {
+    text-align: center;
 }
 :root{
 	--lyrics-transform-origin: center center !important;

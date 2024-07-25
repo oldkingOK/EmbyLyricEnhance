@@ -1,4 +1,4 @@
-var o_onDataFetched = onDataFetched;
+;var o_onDataFetched = onDataFetched;
 var onDataFetched = function(result) {
     if (result.Items && result.Items.length && result.Items[0].Type == `LyricsLine`) {
         let newItems = [], items = result.Items;
@@ -15,4 +15,3 @@ var onDataFetched = function(result) {
     }
     return o_onDataFetched.apply(this, [result]);
 }
-// END
